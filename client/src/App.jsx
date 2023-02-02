@@ -9,6 +9,7 @@ import "./style.scss"
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Single from "./pages/Single";
+import ContactForm from "./pages/ContactForm";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import { AuthProvider,useAuth } from "./contexts/AuthContext"
@@ -35,7 +36,11 @@ import { AuthProvider,useAuth } from "./contexts/AuthContext"
         {
           path:"/project/:id",
           element:<Single/>
+        },{
+          path:"/contactForm",
+          element:<ContactForm/>
         },
+        
       ]
     },
     {

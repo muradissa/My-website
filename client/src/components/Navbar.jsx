@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 // import { AuthContext } from "../contexts/authContext";
 import { useAuth } from "../contexts/AuthContext"
+import ContactForm from "../pages/ContactForm";
 
 import Logo from "../img/logo-no-background.png";
 
@@ -17,7 +18,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="links">
-          <Link className="link" to="/?cat=design">
+          <Link className="link" to="/contactForm" >
             <h6>Contact me</h6>
           </Link>
           <Link className="link" to="/?cat=art">
