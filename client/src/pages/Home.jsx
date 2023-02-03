@@ -101,7 +101,7 @@ const Home = () => {
               </Link>
               <p>{getText(post.desc)}</p>
               <br/>
-              <div class="card">
+              <div className="card">
                 <div style={{display: "-webkit-inline-box"}}>
                   {post.features.map((feature) => (
                     <p style={{paddingRight:"5px"}}>
@@ -109,15 +109,15 @@ const Home = () => {
                     </p>
                   ))}
                 </div>
-                <span class="top"></span>
-                <span class="right"></span>
-                <span class="bottom"></span>
-                <span class="left"></span>
+                <span className="top"></span>
+                <span className="right"></span>
+                <span className="bottom"></span>
+                <span className="left"></span>
               </div>
                 
               <br/>
               <div>
-               <Link className="link" to={`/post/${post.id}`}>
+               <Link className="link" to={`/project/${post.id}`}>
                   <button>Read More</button>
                 </Link>
                 <Link className="link" to={post.githubLink}>

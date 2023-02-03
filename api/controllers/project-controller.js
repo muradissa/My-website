@@ -1,5 +1,6 @@
 import Project from "../models/Project";
 import User from "../models/User";
+import mongoose from "mongoose";
 
 
 export const getAllProjects = async (req,res,next) =>{
@@ -16,7 +17,8 @@ export const getAllProjects = async (req,res,next) =>{
 }
 
 export const addProject = async(req,res,next)=>{
-    const {title,description,image,skills} = req.body;
+    const {title,description,image,skills,user} = req.body;
+    //const {title,description,image,skills,user} = req.body;
     let existingUser;
     try{
         existingUser = await User.findById(user);
@@ -26,11 +28,14 @@ export const addProject = async(req,res,next)=>{
     if(!existingUser){
         return res.status(400).json({message:"Unable to find the user by this userId"})
     }
+    const number = (await (Project.count()) + 1 )+"" ;
     const project =new Project({
+        number,
         title,
         description,
         image,
-        skills
+        skills,
+        user,
     });
     try{
         const session = await mongoose.startSession();
@@ -74,7 +79,7 @@ export const getProjectbyId = async (req,res,next)=>{
     if(!project){
         return res.status(500).json({message:"Unable to find the project"});
     }
-    return res.status(200).json({project: project});
+    return res.status(200).json({data: project});
 
 }
 
@@ -106,4 +111,35 @@ export const getByUserId = async(req,res,next) =>{
         return res.status(404).json({message:"No project Found"});
     }
     return res.status(200).json({projects:userProjects});
+}
+
+export const getProjectbyNumber = async (req,res,next)=>{
+    console.log("getProjectbyNumber");
+    const projectNumber = req.params.id;
+    let project;
+    try {
+        project = await Project.find({"number": projectNumber});
+    } catch (err) {
+       return  console.log(err);
+    }
+    if(!project){
+        return res.status(500).json({message:"Unable to find the project"});
+    }
+    // res.data= project;
+    // res.setHeader('Content-Type', 'application/json');
+
+
+    // res.setHeader("X-Frame-Options", "ALLOWALL");
+    // res.setHeader("Access-Control-Allow-Origin", "*");
+    // res.setHeader("Access-Control-Allow-Methods", "POST, GET");
+    // res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    // if(projectNumber == 3){
+    //     res.send(project)
+    // }
+    //res.send({message:"Unable to find the project"})
+    res.send((project))
+    //res.set('project', 'project');
+    //return res.status(200).json({message:"Unable to find the project"});
+    //return res.status(200).json({project:project});
+
 }
