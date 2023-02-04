@@ -8,13 +8,15 @@ import moment from "moment";
 import { useContext } from "react";
 // import { AuthContext } from "../context/authContext";
 import { useAuth } from "../contexts/AuthContext"
-
 import DOMPurify from "dompurify";
 
+import imagee from "../img/installanchor.jpg";
+
+
 const Single = () => {
-  const [post, setPost] = useState({});
-  const [post2, setPost2] = useState({});
-  const [post3, setPost3] = useState({});
+  const [project, setProject] = useState({});
+  // const [post2, setPost2] = useState({});
+  // const [post3, setPost3] = useState({});
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -23,216 +25,71 @@ const Single = () => {
   const getProject = async () =>{
     const response = await axios.get("http://localhost:5000/api/project/projectnumber/2")
     if(response.status === 200){
-      setPost3(response.data)
-      console.log("result =>>>>>>>>>>>>>>")
-      console.log(response.data)
-      console.log("result =>>>>>>>>>>>>>>")
+      setProject(response.data[0])
+      console.log(response.data[0])
     }
   }
+  useEffect(() =>{
+    getProject()
+  },[]);
   // const { currentUser } = useContext(AuthContext);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const res = await axios.get(`/posts/${postId}`);
-  //       setPost(res.data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   fetchData();
-  // }, [postId]);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const requestOptions = {
-  //         method: "GET",
-  //         headers: { "Content-Type": "application/json" },
-  //         body: JSON.stringify({
-  //           id: postId
-  //         }),
-  //       };
-  //       const pathReq = "http://localhost:5000/api/project/projectnumber/"+postId;
-  //       await fetch(pathReq, requestOptions)
-  //         .then((response) => response.json())
-  //         .then((data) => {
-  //           // setLoading2(true)
-  //           console.log(data)
-  //       });
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   fetchData();
-  // }, [postId]);
-
-
-  /// 2
-  useEffect(() => {
-    const fetchData = async () => {
-      let getdata;
-      try {
-        const requestOptions = {
-          method: "HEAD",
-          mode: 'no-cors',
-          headers: { "Content-Type": "application/json" },
-         
-        };
-        //.then((response) => {
-        const pathReq = "http://localhost:5000/api/project/projectnumber/"+postId; 
-        await fetch(pathReq, requestOptions)
-          .then((response) => {
-            getdata=response;
-            console.log(`response 1 : ${response.status}`);
-            console.log(`response 2 : ${response.data}`);
-            console.log(`response 3 : ${response.Response}`);
-            // console.log(`response 3 : ${response.json}`);
-            //debugger;
-            Object.keys(response.json).forEach(function(key) {
-              console.log('Key : ' + key + ', Value : ' + response[key])
-            })
-          }).then((data)=>{
-            console.log("DATA :",data)
-          })
-          
-      } catch (err) {
-        console.log(err);
-      }
-      //console.log(`getdata 1 : ${getdata}`)
-      // console.log(`getdata  2: ${getdata.json()}`)
-     
-    };
-    fetchData(); 
-  }, [postId]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      let getdata;
-      const testURL = "http://localhost:5000/api/project/projectnumber/2";
-      const myInit = {
-        method: 'GET',
-
-        headers: { "Content-Type": "application/json","Access-Control-Allow-Origin": "*", },
-        
-        mode: 'no-cors',
-      };
-      const myRequest = new Request(testURL);
-      await fetch(myRequest).then((response) => { 
-        console.log("TESSSSSSSSSt"); 
-        // let asdas = response.json();
-        setPost2(response.json())
-        // console.log("=> 0 =>  "+asdas);
-        console.log("=> 1 =>  "+response.body);
-        console.log("=> 2 =>  "+response['project']);
-        // console.log("=> 3 =>  "+asdas);
-        console.log("=> 4 =>  "+response.status);
-        debugger
-        console.log((response))
-      }).then((data) =>{
-        console.log("data 2 "+data)
-      }).catch(function(e){
-        console.log(e);
-      });
-    }
-    // fetchData();
-    const printAddress = async () => {
-      const a = await fetchData();
-      console.log(post2);
-    };
-    printAddress()
-    getProject()
-    // console.log(post2['PromiseResult']);
-    // console.log(post2);
-    // console.log(post2.promiseResult);
-  },[])
-  // fetch("http://localhost:5000/api/project/projectnumber/2").then((response) => {
-  //   setPost3(response.json())
-  //   console.log(post3)
-  //   console.log("post3");
-  //   console.log(post3)
-  // },[])
-  
-
-
-  
 
   const getText = (html) =>{
     const doc = new DOMParser().parseFromString(html, "text/html")
     return doc.body.textContent
   }
 
-
-  
-
-
   return (
     <div className="single">
       <div className="content">
-        <img src={`../upload/${post?.img}`} alt="" />
-        <div className="user">
-          {post.userImg && <img
-            src={post.userImg}
-            alt=""
-          />}
+          {project.title !== undefined && 
+          <div className="project" key={project.id}>
+            <h1>{project.title}</h1>
+            <br/>
+            {/* 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%
+           */}
+            <div className="img" style={{alignItems:"center",display:"flex",justifyContent:"center",width:"100%"}}>
+              <img src={imagee} alt=""  style={{maxWidth:"500px"}}/>
+            </div>
+            <br/>
+            <div className="card">
+              <div style={{display: "-webkit-inline-box"}}>
+                {project.skills.map((feature) => (
+                  <p style={{paddingRight:"5px"}}>
+                    {feature}
+                  </p>
+                ))}
+              </div>
+              <span className="top"></span>
+              <span className="right"></span>
+              <span className="bottom"></span>
+              <span className="left"></span>
+            </div>
+            <br/>
+            <div className="content">
+              <p>{(project.description)}</p>
+              <br/>
+              
+               
+              <div>
+               
+                {/* <Link className="link" to={project.githubLink}> */}
+                  <button >Go to github repositry</button>
+                {/* </Link> */}
+              </div>
+              
+            </div>
+          </div>}
         </div>
-        <h1>{post.title}</h1>
-        <h1>{post3.project}</h1>
-        <p
-          dangerouslySetInnerHTML={{
-            __html: DOMPurify.sanitize(post.desc),
-          }}
-        ></p>      </div>
-      <Menu cat={post.cat}/>
+      <Menu cat={project.cat}/>
       
     </div>
   );
 };
 
 export default Single;
-
-/*
-useEffect(() => {
-    const fetchData = async () => {
-      let getdata;
-      try {
-        const requestOptions = {
-          method: "GET",
-          mode: 'no-cors',
-          headers: { "Content-Type": "application/json" },
-         
-        };
-        //.then((response) => {
-        const pathReq = "http://localhost:5000/api/project/projectnumber/"+postId; 
-        // await axios (pathReq, requestOptions)
-        await axios.get(pathReq,{
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-          },
-          responseType: "json",
-          })
-          .then((response) => {
-            getdata=response;
-            console.log(response.json());
-            console.log(`response 1 : ${response.data}`);
-            console.log(`response 2 : ${response.data}`);
-            console.log(`response 2 : ${response.Response}`);
-            // console.log(`response 3 : ${response.json}`);
-            //debugger;
-            Object.keys(response.json).forEach(function(key) {
-              console.log('Key : ' + key + ', Value : ' + response[key])
-            })
-          }).then((data)=>{
-            console.log("DATA :",data)
-          })
-          
-      } catch (err) {
-        console.log(err);
-      }
-      console.log(`getdata 1 : ${getdata}`)
-      // console.log(`getdata  2: ${getdata.json()}`)
-      debugger
-    };
-    fetchData(); 
-  }, [postId]);
-*/

@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const projectSchema = new Schema({
-    number:{
+    num:{
         type : String,
         required: true,
         unique: true
@@ -24,6 +24,10 @@ const projectSchema = new Schema({
     user:{
         type:mongoose.Types.ObjectId,
         ref:"User",
+        required: true,
+    },
+    githublink:{
+        type:String,
         required: true,
     }
 });

@@ -21,38 +21,42 @@ const Home = () => {
   //   };
   //   fetchData();
   // }, [cat]);
-  const posts = [
+  const projects = [
     {
       id: 1,
+      num: 1,
       title: "Project 1",
-      features:["angular","react", "asdasd"],
-      desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
+      skills:["angular","react", "asdasd"],
+      description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
       img: "https://images.pexels.com/photos/7008010/pexels-photo-7008010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      githubLink:"https://github.com",
+      githublink:"https://github.com",
     },
     {
       id: 2,
+      num: 2,
       title: "Project 2",
-      features:["angular","react", "asdasd"],
-      desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
+      skills:["angular","react", "asdasd"],
+      description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
       img: "https://images.pexels.com/photos/7008010/pexels-photo-7008010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      githubLink:"https://github.com",
+      githublink:"https://github.com",
     },
     {
       id: 3,
+      num: 3,
       title: "Project 3",
-      features:["angular","react", "asdasd"],
-      desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
+      skills:["angular","react", "asdasd"],
+      description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
       img: "https://images.pexels.com/photos/7008010/pexels-photo-7008010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      githubLink:"https://github.com",
+      githublink:"https://github.com",
     },
     {
       id: 4,
+      num: 4,
       title: "Project 4",
-      features:["angular","react", "asdasd"],
-      desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
+      skills:["angular","react", "asdasd"],
+      description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
       img: "https://images.pexels.com/photos/7008010/pexels-photo-7008010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      githubLink:"https://github.com",
+      githublink:"https://github.com",
     },
   ];
 
@@ -90,20 +94,20 @@ const Home = () => {
         </div>
       </div>
       <div className="posts">
-        {posts.map((post) => (
-          <div className="post" key={post.id}>
+        {projects.map((project) => (
+          <div className="post" key={project.num}>
             <div className="img">
-              <img src={`../upload/${post.img}`} alt="" />
+              <img src={`../upload/${project.img}`} alt="" />
             </div>
             <div className="content">
-              <Link className="link" to={`/post/${post.id}`}>
-                <h1>{post.title}</h1>
+              <Link className="link" to={`/post/${project.num}`}>
+                <h1>{project.title}</h1>
               </Link>
-              <p>{getText(post.desc)}</p>
+              <p>{getText(project.description)}</p>
               <br/>
               <div className="card">
                 <div style={{display: "-webkit-inline-box"}}>
-                  {post.features.map((feature) => (
+                  {project.skills.map((feature) => (
                     <p style={{paddingRight:"5px"}}>
                       {feature}
                     </p>
@@ -117,10 +121,10 @@ const Home = () => {
                 
               <br/>
               <div>
-               <Link className="link" to={`/project/${post.id}`}>
+               <Link className="link" to={`/project/${project.num}`}>
                   <button>Read More</button>
                 </Link>
-                <Link className="link" to={post.githubLink}>
+                <Link className="link" to={project.githublink}>
                   <button >Go to github repositry</button>
                 </Link>
               </div>

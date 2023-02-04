@@ -125,21 +125,20 @@ export const getProjectbyNumber = async (req,res,next)=>{
     if(!project){
         return res.status(500).json({message:"Unable to find the project"});
     }
-    // res.data= project;
-    // res.setHeader('Content-Type', 'application/json');
-
-
-    // res.setHeader("X-Frame-Options", "ALLOWALL");
-    // res.setHeader("Access-Control-Allow-Origin", "*");
-    // res.setHeader("Access-Control-Allow-Methods", "POST, GET");
-    // res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    // if(projectNumber == 3){
-    //     res.send(project)
-    // }
-    //res.send({message:"Unable to find the project"})
+    
     res.send((project))
-    //res.set('project', 'project');
-    //return res.status(200).json({message:"Unable to find the project"});
-    //return res.status(200).json({project:project});
+}
 
+export const getAllProjects2 = async (req,res,next) =>{
+    let projects;
+    try {
+        projects = await Project.find();
+    } catch (err) {
+        return console.log(err);
+    }
+    if(!projects){
+        return res.status(404).json({message:"Not projects Found"});
+    }
+    res.send((project))
+    //return res.status(200).json({Projects: projects});
 }
