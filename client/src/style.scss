@@ -171,16 +171,24 @@ $lightblue: #287be8;
           display: flex;
           align-items: center;
           gap: 15px;
-          padding: 10px;
-
+          padding: 15px;
+          
+          .link{
+            transition: .5s;
+            padding-right: 15px;
+            &:hover {
+              color: #7db5ff;
+              scale: 1.1;
+            }
+          }
           h6 {
             font-size: 16px;
             font-weight: 400;
-            transition: .5s;
-            &:hover {
-                color: #7db5ff;
-                scale: 1.1;
-              }
+            // transition: .5s;
+            // &:hover {
+            //     color: #7db5ff;
+            //     scale: 1.1;
+            //   }
           }
 
           span {
@@ -212,7 +220,10 @@ $lightblue: #287be8;
     //FOOTER
 
     footer {
-      margin-top: 100px;
+      // width: 110%;
+      //   margin-left: -5%;
+      //   margin-right: -5%;
+      margin-top: 50px;
       padding: 20px;
       background-color: rgba(70, 70, 70, 0.9);
       
@@ -449,6 +460,7 @@ $lightblue: #287be8;
             h1 {
               font-size: 48px;
               color: #ffffff;
+             
             }
 
             p {

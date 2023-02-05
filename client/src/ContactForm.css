@@ -2,7 +2,7 @@
     
     max-width: 600px;
     /* margin: 0 auto;*/
-    margin-top: 50px; 
+    margin-top: 20px; 
     margin-left: auto;
     margin-right: auto;
     padding: 40px;
@@ -60,4 +60,10 @@ label{
 
 .subBtn{
     text-align: center;
+}
+.successText{
+    text-align: center;
+    padding: 10px;
+    color: lawngreen;
+    scale: 1.4;
 }

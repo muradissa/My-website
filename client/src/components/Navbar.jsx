@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 // import { AuthContext } from "../contexts/authContext";
 import { useAuth } from "../contexts/AuthContext"
 import ContactForm from "../pages/ContactForm";
+import { MDBIcon } from 'mdb-react-ui-kit';
 
 import Logo from "../img/logo-no-background.png";
+import { FaLinkedin,FaGithub } from 'react-icons/fa';
 
 const Navbar = () => {
   // const { currentUser, logout } = useContext(useAuth);
@@ -21,17 +23,21 @@ const Navbar = () => {
           <Link className="link" to="/contactForm" >
             <h6>Contact me</h6>
           </Link>
-          <Link className="link" to="/?cat=art">
-            <h6>Websites</h6>
-          </Link>
+          
           <Link className="link" to="/?cat=science">
             <h6>Projects</h6>
           </Link>
           <Link className="link" to="/?cat=technology">
             <h6>Skills</h6>
           </Link>
-          <Link className="link" to="/?cat=cinema">
+          {/* <Link className="link" to="/?cat=cinema">
             <h6>Crypto</h6>
+          </Link> */}
+          <Link className="link" to="https://www.linkedin.com/in/murad-eissa-0b953318a/">
+            <FaLinkedin style={{scale:"1.5"}}/>
+          </Link>
+          <Link className="link" to="https://github.com/muradissa">
+            <FaGithub style={{scale:"1.5",paddingRight:"15px",color:""}}/>
           </Link>
           
           
@@ -43,12 +49,15 @@ const Navbar = () => {
               Login
             </Link>
           )} */}
-          <span className="write">
+        
+          
+          {/* <span className="write">
             <Link className="link" to="/write">
               Write
             </Link>
-          </span>
+          </span> */}
         </div>
+        
       </div>
     </div>
   );

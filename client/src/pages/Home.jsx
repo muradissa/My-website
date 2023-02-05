@@ -114,7 +114,7 @@ const Home = () => {
               <img src={imagee} alt=""  style={{maxWidth:"450px"}}/>
             </div>
             <div className="content">
-              <Link className="link" to={`/post/${project.num}`}>
+              <Link className="link" to={`/project/${project.num}`}>
                 <h1>{project.title}</h1>
               </Link>
               <p>{getText(project.description)}</p>
