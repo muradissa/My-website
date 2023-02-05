@@ -29,7 +29,7 @@ const ContactForm = () => {
 
   return (
     <Container className="my-5 contact-form">
-      <h1 className="text-center">Contact Us</h1>
+      <h1 className="text-center">Contact me</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formName">
           <Form.Label>Name</Form.Label>

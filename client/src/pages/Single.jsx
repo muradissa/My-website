@@ -20,25 +20,37 @@ const Single = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const postId = location.pathname.split("/")[2];
+  const [projectId, setProjectID] = useState( location.pathname.split("/")[2]);
+  
+  //const projectId = location.pathname.split("/")[2];
   //new
   const getProject = async () =>{
-    const response = await axios.get("http://localhost:5000/api/project/projectnumber/2")
+    const response = await axios.get(`http://localhost:5000/api/project/projectnumber/${projectId}`)
     if(response.status === 200){
       setProject(response.data[0])
       console.log(response.data[0])
     }
-  }
+  } 
   useEffect(() =>{
     getProject()
   },[]);
   // const { currentUser } = useContext(AuthContext);
-
+  useEffect(() =>{
+      //setProjectID(location.pathname.split("/")[2])
+      getProject()
+    },[projectId]);
 
   const getText = (html) =>{
     const doc = new DOMParser().parseFromString(html, "text/html")
     return doc.body.textContent
   }
+
+  const handleClickProject = num => {
+    // 👇️ take the parameter passed from the Child component
+    setProjectID(num);
+
+    console.log('argument from Child: ', num);
+  };
 
   return (
     <div className="single">
@@ -86,7 +98,7 @@ const Single = () => {
             </div>
           </div>}
         </div>
-      <Menu cat={project.cat}/>
+      <Menu handleClickProject={handleClickProject}/>
       
     </div>
   );

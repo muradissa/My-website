@@ -1,7 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-const Menu = ({cat}) => {
+const Menu = ({handleClickProject}) => {
+  const [projects, setProjects] = useState([]);
+  const location = useLocation();
+  const projectId = location.pathname.split("/")[2];
 //   const [posts, setPosts] = useState([]);
 
 //   useEffect(() => {
@@ -15,41 +19,38 @@ const Menu = ({cat}) => {
 //     };
 //     fetchData();
 //   }, [cat]);
-  const posts = [
-    {
-      id: 1,
-      title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-      desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-      img: "https://images.pexels.com/photos/7008010/pexels-photo-7008010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
-    {
-      id: 2,
-      title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-      desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-      img: "https://images.pexels.com/photos/6489663/pexels-photo-6489663.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
-    {
-      id: 3,
-      title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-      desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-      img: "https://images.pexels.com/photos/4230630/pexels-photo-4230630.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
-    {
-      id: 4,
-      title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-      desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-      img: "https://images.pexels.com/photos/6157049/pexels-photo-6157049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
-  ];
+  const getAllProject = async () =>{
+    const response = await axios.get("http://localhost:5000/api/project")
+    if(response.status === 200){
+      setProjects(response.data)
+      console.log(`project id is : ${projectId}`);
+    }else{
+      console.log("Cannot get the projects")
+      // Error message
+    }
+  }
+  useEffect(() =>{
+    getAllProject()
+  },[]);
+
+  // function refreshPage() {
+  //   window.location.reload(false);
+  // }
+
   return (
     <div className="menu">
-      <h1>Other posts you may like</h1>
-      {posts.map((post) => (
-        <div className="post" key={post.id}>
-          <img src={`../upload/${post?.img}`} alt="" />
-          <h2>{post.title}</h2>
-          <button>Read More</button>
+      <h1 style={{color:"white"}}>Other projects you may like</h1>
+      {projects.map((project) => (
+        ( project.num != projectId &&
+        <div className="post" key={project.id}>
+          <img src={`../upload/${project?.img}`} alt="" />
+          <h2 style={{color:"white"}}>{project.title}</h2>
+            <Link className="link" to={`/project/${project.num}`}>
+              <button onClick={event =>handleClickProject(project.num)}>Read More</button>
+            </Link>
+          <br/>
         </div>
+        )
       ))}
     </div>
   );

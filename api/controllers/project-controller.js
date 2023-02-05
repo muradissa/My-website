@@ -13,11 +13,12 @@ export const getAllProjects = async (req,res,next) =>{
     if(!projects){
         return res.status(404).json({message:"Not projects Found"});
     }
-    return res.status(200).json({Projects: projects});
+    res.send((projects)) 
+    //return res.status(200).json({Projects: projects});
 }
 
 export const addProject = async(req,res,next)=>{
-    const {title,description,image,skills,user} = req.body;
+    const {title,description,image,skills,user,githublink} = req.body;
     //const {title,description,image,skills,user} = req.body;
     let existingUser;
     try{
@@ -28,14 +29,15 @@ export const addProject = async(req,res,next)=>{
     if(!existingUser){
         return res.status(400).json({message:"Unable to find the user by this userId"})
     }
-    const number = (await (Project.count()) + 1 )+"" ;
+    const num = (await (Project.count()) + 1 )+"" ;
     const project =new Project({
-        number,
+        num,
         title,
         description,
         image,
         skills,
         user,
+        githublink
     });
     try{
         const session = await mongoose.startSession();
@@ -114,11 +116,11 @@ export const getByUserId = async(req,res,next) =>{
 }
 
 export const getProjectbyNumber = async (req,res,next)=>{
-    console.log("getProjectbyNumber");
     const projectNumber = req.params.id;
+    console.log(`get Project by Number ${projectNumber}`);
     let project;
     try {
-        project = await Project.find({"number": projectNumber});
+        project = await Project.find({"num": projectNumber});
     } catch (err) {
        return  console.log(err);
     }
@@ -130,6 +132,7 @@ export const getProjectbyNumber = async (req,res,next)=>{
 }
 
 export const getAllProjects2 = async (req,res,next) =>{
+    console.log("okokokokokokokokokokok");
     let projects;
     try {
         projects = await Project.find();
@@ -139,6 +142,7 @@ export const getAllProjects2 = async (req,res,next) =>{
     if(!projects){
         return res.status(404).json({message:"Not projects Found"});
     }
-    res.send((project))
+    console.log(projects);
+    res.send((projects))
     //return res.status(200).json({Projects: projects});
 }
