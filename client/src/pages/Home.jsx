@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import Logo from "../img/murad-issa.jpg";
+import imagee from "../img/installanchor.jpg";
 
 const Home = () => {
   const [projects, setProjects] = useState([]);
@@ -109,7 +110,8 @@ const Home = () => {
         {projects.map((project) => (
           <div className="post" key={project.num}>
             <div className="img">
-              <img src={`../upload/${project.img}`} alt="" />
+              {/* <img src={`../upload/${project.img}`} alt="" /> */}
+              <img src={imagee} alt=""  style={{maxWidth:"450px"}}/>
             </div>
             <div className="content">
               <Link className="link" to={`/post/${project.num}`}>
@@ -117,10 +119,11 @@ const Home = () => {
               </Link>
               <p>{getText(project.description)}</p>
               <br/>
+              <h3>Technologies :</h3>
               <div className="card">
                 <div style={{display: "-webkit-inline-box"}}>
                   {project.skills.map((feature) => (
-                    <p style={{paddingRight:"5px"}}>
+                    <p style={{paddingRight:"15px"}}>
                       {feature}
                     </p>
                   ))}

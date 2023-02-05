@@ -15,13 +15,11 @@ import imagee from "../img/installanchor.jpg";
 
 const Single = () => {
   const [project, setProject] = useState({});
-  // const [post2, setPost2] = useState({});
-  // const [post3, setPost3] = useState({});
   const location = useLocation();
   const navigate = useNavigate();
-
   const [projectId, setProjectID] = useState( location.pathname.split("/")[2]);
   
+
   //const projectId = location.pathname.split("/")[2];
   //new
   const getProject = async () =>{
@@ -72,8 +70,8 @@ const Single = () => {
             <div className="card">
               <div style={{display: "-webkit-inline-box"}}>
                 {project.skills.map((feature) => (
-                  <p style={{paddingRight:"5px"}}>
-                    {feature}
+                  <p >
+                    {feature} 
                   </p>
                 ))}
               </div>

@@ -237,7 +237,7 @@ $lightblue: #287be8;
         .post {
           display: flex;
           padding: 20px;
-          gap: 100px;
+          gap: 30px;
           background-color: rgba(66, 66, 66,0.5);
           border-radius: 8px;
 
@@ -248,23 +248,32 @@ $lightblue: #287be8;
           .img {
             flex: 2;
             position: relative;
-
+            filter: drop-shadow(8px 8px 4px lightblue);
             &::after {
               content: "";
               width: 100%;
               height: 100%;
-              background-color: $lightblue;
+              // background-color: $lightblue;
+              //filter: drop-shadow(8px 8px 4px lightblue);
               position: absolute;
               top: 0px;
               left:0px;
               z-index: -1;
             }
+            // &:nth-child(2n + 1) {
+            //   filter: drop-shadow(-8px 8px 4px lightblue);
+            // }
 
-            img {
-              width: 100%;
-              max-height: 400px;
-              object-fit: cover;
-            }
+            // .img {
+            //   width: 100%;
+            //   max-height: 400px;
+            //   object-fit: cover;
+              
+            // }
+          }
+          p{
+            text-align: justify;
+            text-justify: inter-word;
           }
           .card {
             position: relative;
@@ -281,15 +290,21 @@ $lightblue: #287be8;
             flex-direction: column;
             justify-content: space-around;
             align-items: center;
-            padding: 1em;
+            padding: 0.5em;
             
+            p {
+              font-size: 0.95rem;
+              text-align: center;
+            //   &:nth-child(2n + 1) {
+            //   color:#287be8;
+            // }
+            }
+            
+          }
+          h3{
+            color: #fff;
           }
           
-          p {
-            font-size: 0.95rem;
-            text-align: center;
-            
-          }
           
           span {
             position: absolute;
@@ -563,6 +578,8 @@ $lightblue: #287be8;
       p {
         font-size: 18px;
         color:#fff;
+        text-align: justify;
+        text-justify: inter-word;
       }
 
       button {
@@ -601,10 +618,11 @@ $lightblue: #287be8;
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
-        padding: 1em;
+        padding: 0.5em;
         p {
           font-size: 1.2rem;
           text-align: center;
+          padding-right: 15px;
         }
       }
       
