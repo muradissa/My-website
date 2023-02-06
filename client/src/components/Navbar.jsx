@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 // import { AuthContext } from "../contexts/authContext";
-import { useAuth } from "../contexts/AuthContext"
-import ContactForm from "../pages/ContactForm";
-import { MDBIcon } from 'mdb-react-ui-kit';
-
+// import { useAuth } from "../contexts/AuthContext"
+// import ContactForm from "../pages/ContactForm";
+// import { MDBIcon } from 'mdb-react-ui-kit';
 import Logo from "../img/logo-no-background.png";
 import { FaLinkedin,FaGithub } from 'react-icons/fa';
 
@@ -30,7 +29,7 @@ const Navbar = () => {
           <Link className="link" to="/?cat=technology">
             <h6>Skills</h6>
           </Link>
-          {/* <Link className="link" to="/?cat=cinema">
+          {/* <Link className="link" to="/">
             <h6>Crypto</h6>
           </Link> */}
           <Link className="link" to="https://www.linkedin.com/in/murad-eissa-0b953318a/">

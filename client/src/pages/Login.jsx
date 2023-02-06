@@ -1,22 +1,19 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useContext } from "react";
+// import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import { AuthContext } from "../context/authContext";
 import { useAuth } from "../contexts/AuthContext"
 
 const Login = () => {
-
   const { login } = useAuth()
-
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
   });
   const [err, setError] = useState(null);
-
   const navigate = useNavigate();
-
+  
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };

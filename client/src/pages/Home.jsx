@@ -11,57 +11,7 @@ const Home = () => {
   const [images, setImages] = useState([]);
   const [getdata, getData] = useState(false);
   let load =true;
-  // const cat = useLocation().search
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const res = await axios.get(`/posts${cat}`);
-  //       setPosts(res.data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   fetchData();
-  // }, [cat]);
-  // const projects = [
-  //   {
-  //     id: 1,
-  //     num: 1,
-  //     title: "Project 1",
-  //     skills:["angular","react", "asdasd"],
-  //     description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-  //     img: "https://images.pexels.com/photos/7008010/pexels-photo-7008010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  //     githublink:"https://github.com",
-  //   },
-  //   {
-  //     id: 2,
-  //     num: 2,
-  //     title: "Project 2",
-  //     skills:["angular","react", "asdasd"],
-  //     description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-  //     img: "https://images.pexels.com/photos/7008010/pexels-photo-7008010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  //     githublink:"https://github.com",
-  //   },
-  //   {
-  //     id: 3,
-  //     num: 3,
-  //     title: "Project 3",
-  //     skills:["angular","react", "asdasd"],
-  //     description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-  //     img: "https://images.pexels.com/photos/7008010/pexels-photo-7008010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  //     githublink:"https://github.com",
-  //   },
-  //   {
-  //     id: 4,
-  //     num: 4,
-  //     title: "Project 4",
-  //     skills:["angular","react", "asdasd"],
-  //     description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-  //     img: "https://images.pexels.com/photos/7008010/pexels-photo-7008010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  //     githublink:"https://github.com",
-  //   },
-  // ];
+ 
   const getAllImages = async () =>{
     for (let num = 1; num <= 4; num++) {
       const response = await axios.get(`http://localhost:5000/api/image/${num}`)
@@ -70,7 +20,7 @@ const Home = () => {
       }
     }
     getData(true)
-}
+  }
   
   const getAllProject = async () =>{
     const response = await axios.get("http://localhost:5000/api/project")
@@ -80,8 +30,6 @@ const Home = () => {
       
     }
   }
-
-  
 
   useEffect(() =>{
     if(load){
@@ -95,13 +43,6 @@ const Home = () => {
     const doc = new DOMParser().parseFromString(html, "text/html")
     return doc.body.textContent
   }
-  const readMore = () => {
-
-  }
-  const goToGithubRepo = () =>{
-
-  }
-
 
   return (
     <div className="home">
@@ -129,15 +70,13 @@ const Home = () => {
         {projects.map((project) => (
           <div className="post" key={project.num}>
             <div className="img">
-              {/* <img src={`../upload/${project.img}`} alt="" /> */}
-              {/* <img src={imagee} alt=""  style={{maxWidth:"450px"}}/> */}
               <img src={`data:image/jpg;base64,${images[project.num-1]}`} alt="" style={{maxWidth:"450px"}}/>
             </div>
             <div className="content">
               <Link className="link" to={`/project/${project.num}`}>
                 <h1>{project.title}</h1>
               </Link>
-              <p>{getText(project.description)}</p>
+              <p>{getText(project.description)} </p>
               <br/>
               <h3>Technologies :</h3>
               <div className="card">
@@ -153,7 +92,6 @@ const Home = () => {
                 <span className="bottom"></span>
                 <span className="left"></span>
               </div>
-                
               <br/>
               <div>
                <Link className="link" to={`/project/${project.num}`}>
@@ -163,7 +101,6 @@ const Home = () => {
                   <button >Go to github repository</button>
                 </Link>
               </div>
-              
             </div>
           </div>
         ))}

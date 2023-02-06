@@ -9,17 +9,7 @@ const Menu = ({handleClickProject}) => {
   const [images, setImages] = useState([]);
   const [getdata, getData] = useState(false);
   let load =true;
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const res = await axios.get(`/posts/?cat=${cat}`);
-//         setPosts(res.data);
-//       } catch (err) {
-//         console.log(err);
-//       }
-//     };
-//     fetchData();
-//   }, [cat]);
+
   const getAllImages = async () =>{
     for (let num = 1; num <= 4; num++) {
       const response = await axios.get(`http://localhost:5000/api/image/${num}`)

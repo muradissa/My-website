@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-// import Edit from "../img/edit.png";
-// import Delete from "../img/delete.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Menu from "../components/Menu";
 import axios from "axios";
-import moment from "moment";
-import { useContext } from "react";
+// import moment from "moment";
+// import { useContext } from "react";
 // import { AuthContext } from "../context/authContext";
-import { useAuth } from "../contexts/AuthContext"
-import DOMPurify from "dompurify";
+// import { useAuth } from "../contexts/AuthContext"
+// import DOMPurify from "dompurify";
 
 import imagee from "../img/installanchor.jpg";
 
@@ -19,8 +17,7 @@ const Single = () => {
   const navigate = useNavigate();
   const [projectId, setProjectID] = useState( location.pathname.split("/")[2]);
   const [img ,setImg] = useState()
-  
-
+  // const { currentUser } = useContext(AuthContext);
   //const projectId = location.pathname.split("/")[2];
   
   const getProject = async () =>{
@@ -33,25 +30,18 @@ const Single = () => {
   const getImage = async () =>{
     const response = await axios.get(`http://localhost:5000/api/image/${projectId}`)
     if(response.status === 200){
-      //setProject(response.data[0])
-      console.log("image")
-     // console.log(response.data)
       setImg(response.data)
-      //console.log(response.data[0].image.data.data)
-      //const base64String = btoa(String.fromCharCode(...new Uint8Array(response.data[0].image.data.data)));
-      //setImg(btoa(String.fromCharCode(...new Uint8Array(response.data[0].image.data.data))))
     }
   } 
   useEffect(() =>{
     getProject()
     getImage()
   },[]);
-  // const { currentUser } = useContext(AuthContext);
+  
   useEffect(() =>{
-      //setProjectID(location.pathname.split("/")[2])
-      getProject()
-      getImage()
-    },[projectId]);
+    getProject()
+    getImage()
+  },[projectId]);
 
   const getText = (html) =>{
     const doc = new DOMParser().parseFromString(html, "text/html")
@@ -61,8 +51,7 @@ const Single = () => {
   const handleClickProject = num => {
     // 👇️ take the parameter passed from the Child component
     setProjectID(num);
-
-    console.log('argument from Child: ', num);
+    // console.log('argument from Child: ', num);
   };
 
   return (
@@ -72,14 +61,7 @@ const Single = () => {
           <div className="project" key={project.id}>
             <h1>{project.title}</h1>
             <br/>
-            {/* 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%
-           */}
             <div className="img" style={{alignItems:"center",display:"flex",justifyContent:"center",width:"100%"}}>
-              {/* <img src={imagee} alt=""  style={{maxWidth:"500px"}}/> */}
               <img src={`data:image/jpg;base64,${img}`} alt="" style={{maxWidth:"500px"}}/>
             </div>
             <br/>
@@ -100,15 +82,11 @@ const Single = () => {
             <div className="content">
               <p>{(project.description)}</p>
               <br/>
-              
-               
               <div>
-               
-                {/* <Link className="link" to={project.githubLink}> */}
+                <Link className="link" to={project.githublink}>
                   <button >Go to github repository</button>
-                {/* </Link> */}
+                </Link>
               </div>
-              {/* <img src={`data:image/jpg;base64,${img}`} alt=""/> */}
             </div>
           </div>}
         </div>

@@ -3,14 +3,12 @@ import { Container, Form, Button, Alert } from "react-bootstrap";
 import "../ContactForm.css";
 import emailjs from '@emailjs/browser';
 
-
 const ContactForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
-
   const form = useRef();
 
   const sendEmail = (e) => {
@@ -26,17 +24,13 @@ const ContactForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    //service_reke0y2
-    // Here you can add your own logic for sending the form data to a server, for example using Axios
-    // ...
+    // Here the logic for sending the form data to a server
     emailjs.sendForm('service_reke0y2', 'template_qteprvi', form.current, 'wf6kgANltuqu8-Rp6')
       .then((result) => {
           console.log(result.text);
       }, (error) => {
           console.log(error.text);
       });
-
     if (name && email && message) {
       setShowSuccess(true);
       setShowError(false);
@@ -48,8 +42,6 @@ const ContactForm = () => {
       setShowError(true);
     }
   };
-
-  
 
   return (
     <Container className="my-5 contact-form">
@@ -90,7 +82,6 @@ const ContactForm = () => {
             className="form-input form-textarea"
             name="message"
           />
-          
         </Form.Group>
         <br/>
         <div className="subBtn">
