@@ -8,7 +8,9 @@ import imagee from "../img/installanchor.jpg";
 
 const Home = () => {
   const [projects, setProjects] = useState([]);
-  
+  const [images, setImages] = useState([]);
+  const [getdata, getData] = useState(false);
+  let load =true;
   // const cat = useLocation().search
 
   // useEffect(() => {
@@ -60,17 +62,33 @@ const Home = () => {
   //     githublink:"https://github.com",
   //   },
   // ];
-
-  //new
+  const getAllImages = async () =>{
+    for (let num = 1; num <= 4; num++) {
+      const response = await axios.get(`http://localhost:5000/api/image/${num}`)
+      if(response.status === 200){
+        setImages(images => [...images,response.data])
+      }
+    }
+    getData(true)
+}
+  
   const getAllProject = async () =>{
     const response = await axios.get("http://localhost:5000/api/project")
     if(response.status === 200){
       setProjects(response.data)
       console.log(response.data[0])
+      
     }
   }
+
+  
+
   useEffect(() =>{
-    getAllProject()
+    if(load){
+      getAllProject()
+      getAllImages()
+    }
+    load=false;
   },[]);
 
   const getText = (html) =>{
@@ -106,12 +124,14 @@ const Home = () => {
           <button>Get My Resume</button>
         </div>
       </div>
+      { getdata &&
       <div className="posts">
         {projects.map((project) => (
           <div className="post" key={project.num}>
             <div className="img">
               {/* <img src={`../upload/${project.img}`} alt="" /> */}
-              <img src={imagee} alt=""  style={{maxWidth:"450px"}}/>
+              {/* <img src={imagee} alt=""  style={{maxWidth:"450px"}}/> */}
+              <img src={`data:image/jpg;base64,${images[project.num-1]}`} alt="" style={{maxWidth:"450px"}}/>
             </div>
             <div className="content">
               <Link className="link" to={`/project/${project.num}`}>
@@ -140,7 +160,7 @@ const Home = () => {
                   <button>Read More</button>
                 </Link>
                 <Link className="link" to={project.githublink}>
-                  <button >Go to github repositry</button>
+                  <button >Go to github repository</button>
                 </Link>
               </div>
               
@@ -148,6 +168,7 @@ const Home = () => {
           </div>
         ))}
       </div>
+      }
     </div>
   );
 };

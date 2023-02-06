@@ -6,8 +6,9 @@ const Menu = ({handleClickProject}) => {
   const [projects, setProjects] = useState([]);
   const location = useLocation();
   const projectId = location.pathname.split("/")[2];
-//   const [posts, setPosts] = useState([]);
-
+  const [images, setImages] = useState([]);
+  const [getdata, getData] = useState(false);
+  let load =true;
 //   useEffect(() => {
 //     const fetchData = async () => {
 //       try {
@@ -19,6 +20,15 @@ const Menu = ({handleClickProject}) => {
 //     };
 //     fetchData();
 //   }, [cat]);
+  const getAllImages = async () =>{
+    for (let num = 1; num <= 4; num++) {
+      const response = await axios.get(`http://localhost:5000/api/image/${num}`)
+      if(response.status === 200){
+        setImages(images => [...images,response.data])
+      }
+    }
+    getData(true)
+  }
   const getAllProject = async () =>{
     const response = await axios.get("http://localhost:5000/api/project")
     if(response.status === 200){
@@ -30,28 +40,35 @@ const Menu = ({handleClickProject}) => {
     }
   }
   useEffect(() =>{
-    getAllProject()
+    if(load){
+      getAllProject()
+      getAllImages()
+    }
+    load=false;
   },[]);
-
-  // function refreshPage() {
-  //   window.location.reload(false);
-  // }
 
   return (
     <div className="menu">
       <h1 style={{color:"white"}}>Other projects you may like</h1>
-      {projects.map((project) => (
+      { getdata &&
+      (projects.map((project) => (
         ( project.num != projectId &&
-        <div className="post" key={project.id}>
-          <img src={`../upload/${project?.img}`} alt="" />
-          <h2 style={{color:"white"}}>{project.title}</h2>
-            <Link className="link" to={`/project/${project.num}`}>
+        <div className="project" key={project.id}>
+          {/* <img src={`../upload/${project?.img}`} alt="" /> */}
+          <h3 style={{color:"white"}}>{project.title}</h3>
+          <Link className="liknk" to={`/project/${project.num}`}>
+            <img src={`data:image/jpg;base64,${images[project.num-1]}`} alt="" onClick={event =>handleClickProject(project.num)}/>
+          </Link>
+
+          
+            {/* <Link className="link" to={`/project/${project.num}`}>
               <button onClick={event =>handleClickProject(project.num)}>Read More</button>
-            </Link>
-          <br/>
+            </Link> 
+          <br className="line"/>*/}
         </div>
         )
-      ))}
+      )))
+      }
     </div>
   );
 };

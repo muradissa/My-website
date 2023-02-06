@@ -132,7 +132,7 @@ export const getProjectbyNumber = async (req,res,next)=>{
 }
 
 export const getAllProjects2 = async (req,res,next) =>{
-    console.log("okokokokokokokokokokok");
+    // console.log("okokokokokokokokokokok");
     let projects;
     try {
         projects = await Project.find();

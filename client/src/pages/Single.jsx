@@ -18,24 +18,39 @@ const Single = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [projectId, setProjectID] = useState( location.pathname.split("/")[2]);
+  const [img ,setImg] = useState()
   
 
   //const projectId = location.pathname.split("/")[2];
-  //new
+  
   const getProject = async () =>{
     const response = await axios.get(`http://localhost:5000/api/project/projectnumber/${projectId}`)
     if(response.status === 200){
       setProject(response.data[0])
       console.log(response.data[0])
     }
+  }
+  const getImage = async () =>{
+    const response = await axios.get(`http://localhost:5000/api/image/${projectId}`)
+    if(response.status === 200){
+      //setProject(response.data[0])
+      console.log("image")
+     // console.log(response.data)
+      setImg(response.data)
+      //console.log(response.data[0].image.data.data)
+      //const base64String = btoa(String.fromCharCode(...new Uint8Array(response.data[0].image.data.data)));
+      //setImg(btoa(String.fromCharCode(...new Uint8Array(response.data[0].image.data.data))))
+    }
   } 
   useEffect(() =>{
     getProject()
+    getImage()
   },[]);
   // const { currentUser } = useContext(AuthContext);
   useEffect(() =>{
       //setProjectID(location.pathname.split("/")[2])
       getProject()
+      getImage()
     },[projectId]);
 
   const getText = (html) =>{
@@ -64,7 +79,8 @@ const Single = () => {
             width: 100%
            */}
             <div className="img" style={{alignItems:"center",display:"flex",justifyContent:"center",width:"100%"}}>
-              <img src={imagee} alt=""  style={{maxWidth:"500px"}}/>
+              {/* <img src={imagee} alt=""  style={{maxWidth:"500px"}}/> */}
+              <img src={`data:image/jpg;base64,${img}`} alt="" style={{maxWidth:"500px"}}/>
             </div>
             <br/>
             <div className="card">
@@ -89,10 +105,10 @@ const Single = () => {
               <div>
                
                 {/* <Link className="link" to={project.githubLink}> */}
-                  <button >Go to github repositry</button>
+                  <button >Go to github repository</button>
                 {/* </Link> */}
               </div>
-              
+              {/* <img src={`data:image/jpg;base64,${img}`} alt=""/> */}
             </div>
           </div>}
         </div>
